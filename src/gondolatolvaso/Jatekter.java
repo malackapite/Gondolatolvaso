@@ -9,6 +9,7 @@ public class Jatekter {
     private final static String[] szinek = {"P", "T", "Z", "M"};
     private final static String[] ertekek = {"Ász", "Kir", "Fel", "X", "IX", "VIII"};
     private final ArrayList<String> variaciok;
+    private final ArrayList<String> maradekok = new ArrayList<String>();
     private String[] kartyak;
     private final Scanner sc = new Scanner(System.in);
 
@@ -44,12 +45,15 @@ public class Jatekter {
         Random rnd = new Random();
         int melyik = Melyik() - 1;
         String[] tmpLista = new String[szinek.length * ertekek.length];
-        ArrayList<String> maradekok = new ArrayList<String>();
 
         for (int ix = 0; ix < kartyak.length; ix++) {
             if (ix % 3 != melyik) {
-                variaciok.remove(kartyak[ix]);
-                maradekok.add(kartyak[ix]);
+                if (variaciok.contains(kartyak[ix])) {
+                    variaciok.remove(kartyak[ix]);
+                }
+                if (!maradekok.contains(kartyak[ix])) {
+                    maradekok.add(kartyak[ix]);
+                }
             }
         }
         for (int ix = 0; ix < variaciok.size(); ix++) {
