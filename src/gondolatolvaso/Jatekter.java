@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class Jatekter {
 
+    private final static Random rnd = new Random();
     private final static String[] szinek = {"P", "T", "Z", "M"};
     private final static String[] ertekek = {"Ász", "Kir", "Fel", "X", "IX", "VIII"};
     private final ArrayList<String> variaciok;
@@ -42,7 +43,6 @@ public class Jatekter {
     }
 
     private void Kever() {
-        Random rnd = new Random();
         int melyik = Melyik() - 1;
         String[] tmpLista = new String[szinek.length * ertekek.length];
 
@@ -50,27 +50,24 @@ public class Jatekter {
             if (ix % 3 != melyik) {
                 if (variaciok.contains(kartyak[ix])) {
                     variaciok.remove(kartyak[ix]);
-                }
-                if (!maradekok.contains(kartyak[ix])) {
                     maradekok.add(kartyak[ix]);
                 }
             }
         }
+        suffle(variaciok);
         for (int ix = 0; ix < variaciok.size(); ix++) {
             int rndSzam;
 
             do {
-                rndSzam = rnd.nextInt(variaciok.size()) * 3 + ix % 3;
+                rndSzam = rnd.nextInt(kartyak.length/3) * 3 + ix % 3;
             } while (tmpLista[rndSzam] != null);
             tmpLista[rndSzam] = variaciok.get(ix);
         }
-        for (int ix = 0; ix < maradekok.size(); ix++) {
-            int rndSzam;
-
-            do {
-                rndSzam = rnd.nextInt(kartyak.length);
-            } while (tmpLista[rndSzam] != null);
-            tmpLista[rndSzam] = maradekok.get(ix);
+        suffle(maradekok);
+        int nth=0;
+        for (int ix = 0; ix < kartyak.length; ix++) {
+            if(tmpLista[ix]==null)
+                tmpLista[ix] = maradekok.get(nth++);
         }
         this.kartyak = tmpLista;
     }
@@ -86,5 +83,14 @@ public class Jatekter {
             Kever();
         } while (this.variaciok.size() > 1);
         EzVolt();
+    }
+    
+    private ArrayList<String> suffle(ArrayList<String> lista){
+        for(int ix=lista.size();ix>0;ix--){
+            String tmp=lista.get(rnd.nextInt(ix));
+            lista.remove(tmp);
+            lista.add(tmp);
+        }
+        return lista;
     }
 }
