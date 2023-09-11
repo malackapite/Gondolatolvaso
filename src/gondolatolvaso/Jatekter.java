@@ -25,13 +25,15 @@ public class Jatekter {
            System.out.println("%s\t%s\t%s".formatted(kartyak[ix],kartyak[ix+1],kartyak[ix+2]));
     }
     
-    private void Melyik() {
+    private int Melyik() {
+        int bekertSzam;
         boolean jo;
         do {
         System.out.print("melyik oszlop (1-3): ");
-        int bekertSzam = sc.nextInt();
+        bekertSzam = sc.nextInt();
         jo = bekertSzam >= 1 && bekertSzam <= 3;
         } while (!jo);
+        return bekertSzam;
     }
     
     private void Kever(){
