@@ -16,13 +16,13 @@ public class Jatekter {
             }
         }
         Kirak();
-        Melyik();
+        Kever();
     }
     
     
     private void Kirak(){
         for (int ix = 0; ix < kartyak.length; ix+=3)
-           System.out.println("%s\t%s\t%s".formatted(kartyak[ix],kartyak[ix+1],kartyak[ix+2]));
+           System.out.println("%-10s%-10s%-10s".formatted(kartyak[ix],kartyak[ix+1],kartyak[ix+2]));
     }
     
     private int Melyik() {
@@ -37,7 +37,25 @@ public class Jatekter {
     }
     
     private void Kever(){
-        
+        String[] temp=kartyak;
+        switch (Melyik()) {
+            case 2:
+                for (int ix = 0; ix < kartyak.length/3; ix++) {
+                    kartyak[ix]=temp[kartyak.length-3-ix*3];
+                    kartyak[ix+kartyak.length/3]=temp[kartyak.length-2-ix*3];
+                    kartyak[ix+kartyak.length/3*2]=temp[kartyak.length-1-ix*3];
+                }
+                break;
+            case 3:
+                for (int ix = 0; ix < kartyak.length/3; ix++) {
+                    kartyak[ix]=temp[kartyak.length-3-ix*3];
+                    kartyak[ix+kartyak.length/3]=temp[kartyak.length-1-ix*3];
+                    kartyak[ix+kartyak.length/3*2]=temp[kartyak.length-2-ix*3];
+                }
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
     
     private void EzVolt(){
