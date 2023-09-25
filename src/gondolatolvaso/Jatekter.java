@@ -10,7 +10,7 @@ public class Jatekter {
     private final static String[] szinek = {"P", "T", "Z", "M"};
     private final static String[] ertekek = {"Ász", "Kir", "Fel", "X", "IX", "VIII"};
     private final ArrayList<String> variaciok;
-    private final ArrayList<String> maradekok = new ArrayList<String>();
+    private final ArrayList<String> maradekok = new ArrayList<>();
     private String[] kartyak;
     private final Scanner sc = new Scanner(System.in);
 
